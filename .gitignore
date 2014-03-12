@@ -16,12 +16,13 @@
 /tmp
 
 #ignorar otros archivos innecesarios
-database.yml
+/config/database.yml
 doc/
 *.swp
 *~
 .project
 .DS_Store
 .idea
+bundler_stubs/
 .secret
-sample_up.sh
+schema.rb
