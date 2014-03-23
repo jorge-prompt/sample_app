@@ -22,21 +22,21 @@ describe "UserPages" do
   end
   
  #Validación del comportamiento en el registro de usuarios
- #Caso inválido 
+ 
   describe "signup" do
   
     before { visit signup_path }
   
     let(:submit) { "Create my account" }
   
-    describe "with invalid information" do
+    describe "with invalid information" do #Caso inválido 
       it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end
-    end
-#Caso válido - ATENCION - Los campos a llenar son el valor de la etiqueta del campo.
-    describe "with valid information" do
-      before do
+    end #fin caso inválido
+
+    describe "with valid information" do #Caso válido - ATENCION
+      before do                          # Los campos a llenar son el valor del label del campo.
         fill_in "Nombre",       with: "Example User"
         fill_in "Email",        with: "user@example.com"
         fill_in "Password",     with: "foobar"
@@ -46,7 +46,17 @@ describe "UserPages" do
       it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
-    end
+      
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.find_by(email: 'user@example.com') }
+
+        it { should have_link('Sign out') }
+        it { should have_title(user.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Bienvenido') }
+      end      
+      
+    end #fin caso válido
   end #fin validación de registro
   
   
