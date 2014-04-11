@@ -19,6 +19,10 @@ module SessionsHelper #Se incluye en el aplication controller
     @current_user ||= User.find_by(remember_token: remember_token)
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
 #Función encargada de informar si el usuario actual está logeado
   def signed_in?
     !current_user.nil?
@@ -32,5 +36,16 @@ module SessionsHelper #Se incluye en el aplication controller
     self.current_user = nil
   end
 
-  
+#Función que redirige al usuario que intentó entrar sin logearse, pero que ahora logeado tiene acceso.
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+#Función que almacena la dirección privada a la cual el usuario no logeado irá despues de logearse.
+  def store_location
+    session[:return_to] = request.url if request.get?
+  end
+
+
 end
