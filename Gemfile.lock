@@ -165,18 +165,19 @@ DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   bootstrap-will_paginate (= 0.0.9)
   capybara
-  coffee-rails (~> 4.0.0)
+  coffee-rails (= 4.0.1)
   factory_girl_rails (= 4.2.1)
   faker (= 1.1.2)
-  jbuilder (~> 1.2)
-  jquery-rails
+  jbuilder (= 1.5.3)
+  jquery-rails (= 3.1.0)
   pg (= 0.17.1)
   rails (= 4.0.2)
-  rails_12factor
+  rails_12factor (= 0.0.2)
   rspec-rails
-  sass-rails (~> 4.0.0)
+  sass-rails (= 4.0.2)
   sdoc
   selenium-webdriver
-  turbolinks
-  uglifier (>= 1.3.0)
+  sprockets (= 2.11.0)
+  turbolinks (= 2.2.1)
+  uglifier (= 2.5.0)
   will_paginate (= 3.0.4)

@@ -27,6 +27,14 @@ module SessionsHelper #Se incluye en el aplication controller
   def signed_in?
     !current_user.nil?
   end
+  
+#Función que redirige al usuario dependiendo de si está logeado o no
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in."
+    end
+  end
 
 #Función encargada de eliminar el remember token de la BD y de la cookie, además el user apuntando a nil
   def sign_out
@@ -46,6 +54,5 @@ module SessionsHelper #Se incluye en el aplication controller
   def store_location
     session[:return_to] = request.url if request.get?
   end
-
 
 end

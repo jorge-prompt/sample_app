@@ -66,11 +66,20 @@ describe "UserPages" do
 #Validación de página de perfil (usuario logeado), debe contener los elementos según diseño  
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }  # haciendo uso de FactoryGirls para crear usuario en DB Test
+    let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
+    let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
+    
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
-  end
+    
+    describe "microposts" do
+      it { should have_content(m1.content) }
+      it { should have_content(m2.content) }
+      it { should have_content(user.microposts.count) }
+    end
+  end#fin profile page
   
  #Validación del comportamiento en el registro de usuarios
  
